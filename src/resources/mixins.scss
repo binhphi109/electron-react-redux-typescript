@@ -1,0 +1,16 @@
+/**
+ * theme-set - Change color of a css property based on the currently active theme
+ *
+ * @param  {key}     CSS property
+ * @param  {color}   Color name defined in the themes under _color-palette.scss
+ *
+ * @example - @include theme-set('background', 'color-background');
+ * @returns - background: #FFF;
+ */
+ @mixin theme-set($key, $color: null) {
+  @each $theme-name, $theme-color in $themes {
+      .theme-#{$theme-name} & {
+          #{$key}: map-get(map-get($themes, $theme-name), if($color, $color, $key))
+      }
+  }
+}
